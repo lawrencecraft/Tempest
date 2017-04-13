@@ -12,6 +12,7 @@
     <orderEntry type="module" module-name="Tempest_main" />
     <orderEntry type="library" name="Gradle: org.apache.storm:storm-core:1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: redis.clients:jedis:2.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.5" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: com.esotericsoftware:kryo:3.0.3" level="project" />
     <orderEntry type="library" name="Gradle: org.clojure:clojure:1.7.0" level="project" />
