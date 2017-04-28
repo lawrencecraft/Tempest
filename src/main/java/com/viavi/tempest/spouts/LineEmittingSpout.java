@@ -1,5 +1,6 @@
 package com.viavi.tempest.spouts;
 
+import com.viavi.tempest.common.TempestConstants;
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.OutputFieldsDeclarer;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class LineEmittingSpout extends BaseRichSpout{
 
     private List<String> _filesToEmmit;
-    private FileReader _filereader;
+    private FileReader _fileReader;
     private SpoutOutputCollector _collector;
 
 
@@ -25,16 +26,13 @@ public class LineEmittingSpout extends BaseRichSpout{
         DirectoryEnumerator directoryEnumerator = new FilesystemDirectoryEnumerator();
         _filesToEmmit = directoryEnumerator.getFilePathsFromDirectory("C:\\Git\\Tempest\\plays\\Shakespeare");
         _collector = collector;
-        _filereader = new FilesystemFileReader();
+        _fileReader = new FilesystemFileReader();
     }
 
     @Override
     public void nextTuple() {
         for (String file: _filesToEmmit) {
-            _filereader.getFileLines(file).forEach(line -> emitToStorm(line));
-
-
-
+            _fileReader.getFileLines(file).forEach(line -> emitToStorm(line));
         }
     }
 
@@ -44,6 +42,6 @@ public class LineEmittingSpout extends BaseRichSpout{
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("Lines"));
+        declarer.declare(new Fields(TempestConstants.STORM_FIELD_LINE));
     }
 }
